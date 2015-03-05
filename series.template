@@ -26,7 +26,11 @@
         <div class="list-group">
             {% for show in shows %}
                 {% if show['error'] is defined %}
-                    <a href="{{ show['url'] }}" class="list-group-item list-group-item-warning">
+                    {% if show['error'] == 1 %}
+                        <a href="{{ show['url'] }}" class="list-group-item list-group-item-danger">
+                    {% elif show['error'] == 2 %}
+                        <a href="{{ show['url'] }}" class="list-group-item list-group-item-warning">
+                    {% endif %}
                     <h4 class="list-group-item-heading">{{ show['filename'] }}</h4>
                 {% else %}
                     <a href="{{ show['url'] }}" class="list-group-item">
@@ -38,7 +42,7 @@
                     <dt>Time</dt>
                     <dd>{{ show['time'] }}</dd>
                     {% if show['error'] is defined %}
-                        <dt>Parse Error</dt>
+                        <dt>Error</dt>
                         <dd>{{ show['error'] }}
                     {% endif %}
                 </dl>
