@@ -31,6 +31,7 @@ for filename in glob.iglob(os.path.join(SUCCESS_DIR, '*')):
         'filename': os.path.basename(filename),
         'time': t,
         'url': url,
+        'epoch': stat,
     }
 
     try:
@@ -60,38 +61,13 @@ for filename in glob.iglob(os.path.join(FAILURE_DIR, '*')):
         'filename': os.path.basename(filename),
         'time': t,
         'url': url,
+        'epoch': stat,
         'error': 1,
     }
 
     shows.append(show)
 
-
-#shows = []
-#for entry in d:
-
-    #pub_time = time.strftime(
-        #'%a, %d %b %Y:%M:%S %Z',
-        #entry['published_parsed'],
-    #)
-
-    #show = {
-        #'filename': entry['title'],
-        #'time': pub_time,
-        #'url': entry['link'],
-    #}
-
-    #try:
-        #r = FileParser(entry['title']).parse().getepdata()
-
-        #show['title'] = r['seriesname']
-        #show['episode'] = r['episode']
-
-    #except tvnamer.tvnamer_exceptions.InvalidFilename as e:
-        #print("Error parsing {}: {}".format(entry['title'], e))
-        #show['error'] = str(e)
-
-    #finally:
-        #shows.append(show)
+shows.sort(key=lambda s: - s['epoch'])
 
 with open(TEMPLATE_PATH) as f:
     t = Template(f.read())
