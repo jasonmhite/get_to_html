@@ -16,7 +16,8 @@ shows = []
 
 for filename in glob.iglob(os.path.join(SUCCESS_DIR, '*')):
     with open(filename) as f:
-        url = f.read().strip()
+        url = f.readline().strip()
+        done = True if f.readline().strip() == 'done' else False
 
     stat = os.stat(filename).st_mtime
 
@@ -31,6 +32,7 @@ for filename in glob.iglob(os.path.join(SUCCESS_DIR, '*')):
         'time': t,
         'url': url,
         'epoch': stat,
+        'done': done,
     }
 
     try:

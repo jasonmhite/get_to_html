@@ -32,6 +32,9 @@
                         <a href="{{ show['url'] }}" class="list-group-item list-group-item-warning">
                     {% endif %}
                     <h4 class="list-group-item-heading">{{ show['filename'] }}</h4>
+                {% elif show['done'] is defined and show['done'] %}
+                    <a href="{{ show['url'] }}" class="list-group-item list-group-item-success">
+                    <h4 class="list-group-item-heading">{{ show['title'] }} - {{ show['episode'] }}</h4>
                 {% else %}
                     <a href="{{ show['url'] }}" class="list-group-item">
                     <h4 class="list-group-item-heading">{{ show['title'] }} - {{ show['episode'] }}</h4>
