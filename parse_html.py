@@ -1,4 +1,3 @@
-import feedparser
 import tvnamer
 import time
 import glob
